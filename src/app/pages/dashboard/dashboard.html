@@ -1,0 +1,48 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Small Top Navigation -->
+ <nav class="bg-white shadow-sm border-b">
+  <div class="max-w-4xl mx-auto px-4 py-3">
+    <div class="flex justify-center items-center space-x-6">
+
+      <button routerLink="/casino" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>🎰</span>
+        <span>კაზინო</span>
+      </button>
+
+      <button routerLink="/roast" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>🔥</span>
+        <span>კოდის როუსტი</span>
+      </button>
+
+      <button routerLink="/bug-chase" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>🏃</span>
+        <span>Bug Chase თამაში</span>
+      </button>
+
+      <button routerLink="/analyze-code" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>🔍</span>
+        <span> მაჩვენე შენი კოდი</span>
+      </button>
+
+      <button routerLink="/dating" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>💑</span>
+        <span>Dating</span>
+      </button>
+
+      <button routerLink="/escape-meeting" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors">
+        <span>🏃‍♂️</span>
+        <span>გაექეცი შეხვედრას</span>
+      </button>
+
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Rest of your content goes here -->
+  <main class="p-8">
+    <div class="max-w-4xl mx-auto text-center text-gray-500">
+      <p *ngIf="username">Welcome, {{ username }}!</p>
+    </div>
+  </main>
+</div>
