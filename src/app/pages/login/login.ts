@@ -32,7 +32,7 @@ export class Login {
         console.log(res);
 
          if (typeof window !== 'undefined') {
-      // sessionStorage.setItem('username', res.username);
+      sessionStorage.setItem('username', res.username);
     }
         
         
