@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-// user.service.ts - Fixed version
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -33,32 +29,18 @@ export interface RegisterResponse {
 })
 export class UserService {
   private apiUrl = 'http://localhost:3000/api';
-<<<<<<< HEAD
 
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
-=======
-  
-  // Add BehaviorSubject for current user
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-
-  // Public observables
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   public currentUser$ = this.currentUserSubject.asObservable();
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private http: HttpClient) {
-<<<<<<< HEAD
-=======
-    // Initialize from sessionStorage
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
     this.initializeFromStorage();
   }
 
   private initializeFromStorage(): void {
-<<<<<<< HEAD
     if (typeof window !== 'undefined') {
       const storedUser = sessionStorage.getItem('currentUser');
       if (storedUser) {
@@ -70,25 +52,10 @@ export class UserService {
           console.error('Error parsing stored user:', error);
           sessionStorage.removeItem('currentUser');
         }
-=======
-    const storedUser = sessionStorage.getItem('currentUser');
-    if (storedUser) {
-      try {
-        const user = JSON.parse(storedUser);
-        this.currentUserSubject.next(user);
-        this.isAuthenticatedSubject.next(true);
-      } catch (error) {
-        console.error('Error parsing stored user:', error);
-        sessionStorage.removeItem('currentUser');
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
       }
     }
   }
 
-<<<<<<< HEAD
-=======
-  // Login method
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   login(username: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { username }, {
       withCredentials: true
@@ -105,10 +72,6 @@ export class UserService {
     );
   }
 
-<<<<<<< HEAD
-=======
-  // Register method - ეს იყო პრობლემა!
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   register(userData: User): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, userData, {
       withCredentials: true
@@ -125,10 +88,6 @@ export class UserService {
     );
   }
 
-<<<<<<< HEAD
-=======
-  // Logout method
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   logout(): Observable<any> {
     return this.http.post(`${this.apiUrl}/logout`, {}, {
       withCredentials: true
@@ -138,17 +97,12 @@ export class UserService {
       }),
       catchError(error => {
         console.error('Logout error:', error);
-<<<<<<< HEAD
-=======
-        // Clear user even if logout fails
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
         this.clearCurrentUser();
         throw error;
       })
     );
   }
 
-<<<<<<< HEAD
   private setCurrentUser(user: User): void {
     this.currentUserSubject.next(user);
     this.isAuthenticatedSubject.next(true);
@@ -165,23 +119,6 @@ export class UserService {
     }
   }
 
-=======
-  // Set current user - ეს method არ იყო!
-  private setCurrentUser(user: User): void {
-    this.currentUserSubject.next(user);
-    this.isAuthenticatedSubject.next(true);
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
-  }
-
-  // Clear current user - ეს method არ იყო!
-  private clearCurrentUser(): void {
-    this.currentUserSubject.next(null);
-    this.isAuthenticatedSubject.next(false);
-    sessionStorage.removeItem('currentUser');
-  }
-
-  // Check authentication status with server (optional)
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   checkAuthStatus(): Observable<{ authenticated: boolean; user?: User }> {
     return this.http.get<{ authenticated: boolean; user?: User }>(`${this.apiUrl}/auth-status`, {
       withCredentials: true
@@ -200,10 +137,6 @@ export class UserService {
     );
   }
 
-<<<<<<< HEAD
-=======
-  // Getters for synchronous access
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
   get currentUser(): User | null {
     return this.currentUserSubject.value;
   }
@@ -216,8 +149,4 @@ export class UserService {
     const user = this.currentUser;
     return user ? user.username : null;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 14556de17e333e361ad227d71584c1e682aa569e
