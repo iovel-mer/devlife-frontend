@@ -1,1 +1,40 @@
-<p>escape-meeting works!</p>
+<div class="p-6 bg-gray-900 text-white min-h-screen">
+  <h1 class="text-3xl font-bold mb-4">🏃 გაექეცი შეხვედრას</h1>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    <div>
+      <label class="block mb-1">შეხვედრის ტიპი</label>
+      <select [(ngModel)]="selectedCategory" class="w-full p-2 rounded bg-gray-800 border border-gray-700">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block mb-1">საბაბის ტიპი</label>
+      <select [(ngModel)]="selectedType" class="w-full p-2 rounded bg-gray-800 border border-gray-700">
+        <option *ngFor="let type of excuseTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+  </div>
+
+  <button (click)="generateExcuse()" class="mt-4 bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">
+    დააგენერირე საბაბი
+  </button>
+
+  <div *ngIf="generatedExcuse" class="mt-6 bg-gray-800 p-4 rounded shadow">
+    <p class="text-lg">{{ generatedExcuse }}</p>
+    <p class="text-sm text-green-400 mt-1">სარწმუნოობის სკორი: {{ believabilityScore }}%</p>
+
+    <div class="mt-2 flex gap-2">
+      <button (click)="copyToClipboard()" class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded">კოპირება</button>
+      <button (click)="addToFavorites()" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded">ფავორიტებში</button>
+    </div>
+  </div>
+
+  <div *ngIf="favorites.length > 0" class="mt-8">
+    <h2 class="text-xl font-semibold mb-2">⭐ შენახული საბაბები</h2>
+    <ul class="list-disc ml-5 space-y-1">
+      <li *ngFor="let fav of favorites">{{ fav }}</li>
+    </ul>
+  </div>
+</div>

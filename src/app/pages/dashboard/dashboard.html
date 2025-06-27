@@ -1,26 +1,44 @@
 <div class="min-h-screen bg-gray-50">
-  <!-- Small Top Navigation -->
-  <nav class="bg-white shadow-sm border-b">
-    <div class="max-w-4xl mx-auto px-4 py-3">
-      <div class="flex justify-center items-center space-x-6">
+  <!-- Enhanced Top Navigation -->
+  <nav class="bg-white shadow-md border-b sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4">
+      <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-sm font-medium">
 
-        <!-- კაზინო ღილაკი -->
-        <button
-          routerLink="/casino"
-          class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors"
-        >
-          <span>🎰</span>
-          <span>კაზინო</span>
-        </button>
+        <!-- კაზინო -->
+        <a routerLink="/casino" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          🎰 <span>კაზინო</span>
+        </a>
 
-        <!-- კოდის როუსტი ღილაკი -->
-        <button
-          routerLink="/roast"
-          class="flex items-center space-x-1 text-gray-700 hover:text-gray-900 text-sm transition-colors"
-        >
-          <span>🔥</span>
-          <span>კოდის როუსტი</span>
-        </button>
+        <!-- კოდის როუსტი -->
+        <a routerLink="/roast" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          🔥 <span>კოდის როუსტი</span>
+        </a>
+
+        <!-- Bug Chase -->
+        <a routerLink="/bug-chase" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          🐞 <span>Bug Chase</span>
+        </a>
+
+        <!-- Code Analyzer -->
+        <a routerLink="/analyze-code" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          🔍 <span>Code Analyzer</span>
+        </a>
+
+        <!-- Dating Room -->
+        <a routerLink="/dating" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          💘 <span>Dating Room</span>
+        </a>
+
+        <!-- Escape Meeting -->
+        <a routerLink="/escape-meeting" routerLinkActive="text-indigo-600 font-semibold"
+           class="flex items-center gap-1 text-gray-700 hover:text-indigo-500 transition">
+          🏃 <span>გაექეცი შეხვედრას</span>
+        </a>
 
       </div>
     </div>

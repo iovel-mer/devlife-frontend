@@ -1,1 +1,52 @@
-<p>analyze-code works!</p>
+<div class="p-6 text-white bg-gray-900 min-h-screen">
+  <h1 class="text-3xl font-bold mb-6">🔍 Show Me Your Code</h1>
+
+  <!-- Username input -->
+  <div class="mb-4">
+    <label class="block text-sm mb-1">GitHub Username</label>
+    <input
+      type="text"
+      [(ngModel)]="username"
+      placeholder="Enter your GitHub username"
+      class="w-full p-2 rounded bg-gray-800 border border-gray-700"
+    />
+  </div>
+
+  <!-- Load Repos Button -->
+  <button
+    (click)="analyzeRepository()"
+    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded mb-4"
+  >
+    Load Repositories
+  </button>
+
+  <!-- Repo Selector -->
+  <div *ngIf="repoList.length > 0" class="mb-4">
+    <label class="block text-sm mb-1">Select Repository</label>
+    <select
+      [(ngModel)]="selectedRepo"
+      class="w-full p-2 rounded bg-gray-800 border border-gray-700"
+    >
+      <option value="" disabled selected>Select a repository</option>
+      <option *ngFor="let repo of repoList" [value]="repo">{{ repo }}</option>
+    </select>
+  </div>
+
+  <!-- Analyze Button -->
+  <button
+    [disabled]="!selectedRepo"
+    (click)="performAnalysis()"
+    class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded disabled:opacity-40"
+  >
+    Analyze Repository
+  </button>
+
+  <!-- Analysis result -->
+  <div *ngIf="analysisResult" class="mt-6 bg-gray-800 p-4 rounded shadow-lg">
+    <h2 class="text-xl font-semibold mb-2">Analysis Result</h2>
+    <p><strong>Type:</strong> {{ analysisResult.type }}</p>
+    <p><strong>Strengths:</strong> {{ analysisResult.strengths.join(', ') }}</p>
+    <p><strong>Weaknesses:</strong> {{ analysisResult.weaknesses.join(', ') }}</p>
+    <p><strong>Celebrity Match:</strong> {{ analysisResult.celebrity }}</p>
+  </div>
+</div>
