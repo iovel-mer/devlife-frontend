@@ -1,1 +1,30 @@
-<p>roast works!</p>
+<div class="p-6 max-w-4xl mx-auto text-white">
+  <h2 class="text-3xl font-bold mb-4">🔥 Code Roast</h2>
+
+  <!-- დავალების ბლოკი -->
+  <div class="bg-gray-800 p-4 rounded-xl mb-4">
+    <p class="text-lg font-medium text-gray-300">🧩 Task:</p>
+    <p class="mt-2 text-gray-400">{{ challenge }}</p>
+  </div>
+
+  <!-- Ace Code Editor -->
+  <div class="mb-4">
+    <app-code-editor (codeChanged)="handleCodeChange($event)"></app-code-editor>
+  </div>
+
+  <!-- Submit ღილაკი -->
+  <button
+    (click)="submitCode()"
+    class="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-lg text-white font-semibold"
+  >
+    Roast Me 🔥
+  </button>
+
+  <!-- შეფასების შედეგი -->
+  <div
+    *ngIf="roastMessage"
+    class="mt-4 p-4 bg-yellow-900 text-yellow-300 rounded-xl shadow"
+  >
+    {{ roastMessage }}
+  </div>
+</div>

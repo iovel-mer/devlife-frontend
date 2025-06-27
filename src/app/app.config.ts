@@ -7,6 +7,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
     provideRouter(routes),
+    
   ],
 };
+
+
+
+
 
