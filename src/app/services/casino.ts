@@ -51,4 +51,12 @@ export class CasinoService {
       })
     );
   }
+
+  claimDaily(): Observable<{ message: string; pointsDelta: number }> {
+  return this.http.post<{ message: string; pointsDelta: number }>(
+    `${this.baseUrl}/daily`,
+    {}
+  );
+}
+
 }

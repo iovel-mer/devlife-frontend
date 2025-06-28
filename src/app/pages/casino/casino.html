@@ -1,28 +1,28 @@
-<div class="p-6 max-w-4xl mx-auto text-white font-sans bg-black">
+<div class="p-6  text-white font-sans bg-black">
   <div class="mb-4 text-center">
-    <h2 class="text-4xl  font-bold mb-2">Code Casino 🎰</h2>
+    <h2 class="text-4xl font-bold mb-2">Code Casino 🎰</h2>
     <p class="text-gray-400">Pick the correct code and double your bet!</p>
   </div>
 
   <div class="grid md:grid-cols-2 gap-6 mb-8">
-    <!-- Correct Code Block -->
+    <!-- Snippet A -->
     <div class="bg-gradient-to-br from-green-900 to-gray-800 rounded-2xl p-5 shadow-2xl border border-green-700">
       <h3 class="text-lg font-semibold text-green-300 mb-2">Code Snippet A</h3>
-      <pre class="whitespace-pre-wrap text-sm bg-black/30 p-3 rounded-md text-green-200 mb-4 overflow-auto max-h-64">{{ correctCode }}</pre>
+      <pre class="whitespace-pre-wrap text-sm bg-black/30 p-3 rounded-md text-green-200 mb-4 overflow-auto max-h-64">{{ optionA }}</pre>
       <button
-        (click)="choose(correctCode)"
+        (click)="choose('A')"
         class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 shadow-md"
       >
         ✅ This is correct
       </button>
     </div>
 
-    <!-- Buggy Code Block -->
+    <!-- Snippet B -->
     <div class="bg-gradient-to-br from-red-900 to-gray-800 rounded-2xl p-5 shadow-2xl border border-red-700">
       <h3 class="text-lg font-semibold text-red-300 mb-2">Code Snippet B</h3>
-      <pre class="whitespace-pre-wrap text-sm bg-black/30 p-3 rounded-md text-red-200 mb-4 overflow-auto max-h-64">{{ buggyCode }}</pre>
+      <pre class="whitespace-pre-wrap text-sm bg-black/30 p-3 rounded-md text-red-200 mb-4 overflow-auto max-h-64">{{ optionB }}</pre>
       <button
-        (click)="choose(buggyCode)"
+        (click)="choose('B')"
         class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 shadow-md"
       >
         ✅ This is correct
@@ -46,4 +46,52 @@
   <div *ngIf="message" class="text-center mt-4">
     <p class="text-xl font-bold text-yellow-400">{{ message }}</p>
   </div>
+  <!-- Divider -->
+<hr class="my-10 border-gray-700" />
+
+<!-- Extra Features Section -->
+<div class="space-y-8 text-white">
+
+  <!-- 🔥 Streak System -->
+  <div class="bg-gradient-to-br from-yellow-700 to-gray-900 rounded-xl p-5 shadow-xl border border-yellow-600">
+    <h3 class="text-xl font-bold text-yellow-300 mb-2">🔥 Streak</h3>
+    <p class="text-sm text-gray-300">You're on a <span class="font-semibold text-yellow-400">{{ streak }}</span> win streak!</p>
+    <!-- Tip: Add bonus message if streak ≥ 3 -->
+    <p *ngIf="streak >= 3" class="text-green-400 mt-1">🔥 Keep going! Bonus activated!</p>
+  </div>
+
+  <!-- 📅 Daily Challenge -->
+  <div class="bg-gradient-to-br from-blue-800 to-gray-900 rounded-xl p-5 shadow-xl border border-blue-600">
+    <h3 class="text-xl font-bold text-blue-300 mb-2">📅 Daily Challenge</h3>
+    <p class="text-sm text-gray-300 mb-3">Play one free game per day!</p>
+    <button
+      [disabled]="!canPlayDaily"
+      class="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-2 px-4 rounded-xl transition duration-300 shadow-md"
+      (click)="claimDaily()"
+    >
+      🎁 Claim Your Daily Reward
+    </button>
+    <p *ngIf="!canPlayDaily" class="text-red-400 mt-2">⏳ Already claimed for today</p>
+  </div>
+
+  <!-- ♒ Zodiac Luck Multiplier -->
+  <div class="bg-gradient-to-br from-purple-800 to-gray-900 rounded-xl p-5 shadow-xl border border-purple-600">
+    <h3 class="text-xl font-bold text-purple-300 mb-2">♒ Zodiac Luck</h3>
+    <p class="text-sm text-gray-300">Today's zodiac bonus for <span class="font-semibold text-purple-400">{{ zodiac }}</span></p>
+    <p class="text-green-400 mt-1">🔮 You have a 2x multiplier today!</p> <!-- Placeholder -->
+  </div>
+
+  <!-- 🏆 Leaderboard -->
+  <div class="bg-gradient-to-br from-pink-800 to-gray-900 rounded-xl p-5 shadow-xl border border-pink-600">
+    <h3 class="text-xl font-bold text-pink-300 mb-4">🏆 Leaderboard</h3>
+    <ul class="text-sm space-y-2 text-white">
+      <li *ngFor="let player of leaderboard; let i = index" class="flex justify-between">
+        <span>#{{ i + 1 }} {{ player.username }}</span>
+        <span class="font-semibold text-yellow-300">{{ player.points }} pts</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
 </div>

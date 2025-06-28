@@ -17,8 +17,17 @@ export class Casino implements OnInit {
   experience = '';
   betAmount = 0;
   message = '';
-  correctCode = '';
-  buggyCode = '';
+  optionA = '';
+  optionB = '';
+  correctAnswer = '';
+  points = 100;
+  streak = 0;
+canPlayDaily = true; // როცა ბექი მიაწვდის
+leaderboard = [
+  { username: 'testuser', points: 500 }, // placeholder
+  { username: 'coder123', points: 450 },
+  { username: 'devgirl', points: 400 }
+];
 
   constructor(private casinoService: CasinoService) {}
 
@@ -39,31 +48,69 @@ export class Casino implements OnInit {
       experience: this.experience
     }).subscribe({
       next: (res) => {
-        this.correctCode = res.correctCode;
-        this.buggyCode = res.buggyCode;
+        const shuffled = [res.correctCode, res.buggyCode].sort(() => Math.random() - 0.5);
+        this.optionA = shuffled[0];
+        this.optionB = shuffled[1];
+        this.correctAnswer = res.correctCode;
+        this.message = ''; 
       },
       error: (err) => {
         console.warn('Using mock data (fetch):', err.message);
-        this.correctCode = 'function login() {\n  return true;\n}';
-        this.buggyCode = 'function login() {\n  return false;\n}';
+        this.optionA = 'function login() {\n  return true;\n}';
+        this.optionB = 'function login() {\n  return false;\n}';
+        this.correctAnswer = this.optionA;
       }
     });
   }
 
-  choose(code: string) {
-    this.casinoService.getSnippets({
-      stack: this.stack,
-      experience: this.experience
+  choose(choice: 'A' | 'B') {
+    if (this.betAmount <= 0) {
+      this.message = "⚠️ Please enter a valid bet amount.";
+      return;
+    }
+
+    if (this.betAmount > this.points) {
+      this.message = "😓 You don't have enough points!";
+      return;
+    }
+
+    const selectedCode = choice === 'A' ? this.optionA : this.optionB;
+
+    this.casinoService.submitBet({
+      selectedCode,
+      bet: this.betAmount,
+      username: this.username,
+      zodiac: this.zodiac
     }).subscribe({
       next: (res) => {
-        this.correctCode = res.correctCode;
-        this.buggyCode = res.buggyCode;
+        this.message = res.message;
+        this.points += res.pointsDelta;
+
+        if (res.isWin) {
+          this.streak += 1;
+        } else {
+          this.streak = 0;
+        }
+
+        this.fetchSnippets(); 
       },
       error: (err) => {
-        console.warn('Using mock data (choose):', err.message);
-        this.correctCode = 'function multiply(x, y) {\n  return x * y;\n}';
-        this.buggyCode = 'function multiply(x, y) {\n  return x + y;\n}';
+        this.message = "❌ Error occurred while submitting your choice.";
+        console.error(err);
       }
     });
   }
+  claimDaily() {
+  this.casinoService.claimDaily().subscribe({
+    next: (res) => {
+      this.message = res.message;
+      this.points += res.pointsDelta;
+      this.canPlayDaily = false;
+    },
+    error: () => {
+      this.message = 'Failed to claim daily reward.';
+    }
+  });
+}
+
 }
